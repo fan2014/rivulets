@@ -9,4 +9,19 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Rivulets::Application.config.secret_key_base = 'a5617507e39f83667f32bb3a4351735cc48471dc5025d10521b3156a4c9facb20b128752570d70f74d5c883759a919c96a45e511ede85291dcf27e7048593827'
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+Rivulets::Application.config.secret_key_base = secure_token
