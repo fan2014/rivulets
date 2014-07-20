@@ -13,7 +13,15 @@
 <div class="center hero-unit">
 	<h1>Welcome to Rivulets</h1>
 	<p> Quizzes for math 114</p>
-	<%= link_to "Sign in", '#', class: "btn btn-large btn-danger" %>
+	<%= form_for(@user) do |f| %>
+	  <%= f.label :name %>
+		<%= f.text_field :name %>
+	  <%= f.label :student_id, "Student ID" %>
+		<%= f.text_field :student_id %>
+		
+		<%= f.submit "Sign in", class: "btn btn-large btn-danger" %>
+	<% end %>
+	
 </div>
 
 

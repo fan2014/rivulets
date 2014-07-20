@@ -1,5 +1,7 @@
 class User < ActiveRecord::Base
   
+  mount_uploader :image, ImageUploader
+  
   validates :name, presence: true, length: { maximum: 50 }
 
   def self.enrolled_students_id_list
